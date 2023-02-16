@@ -1,6 +1,9 @@
 package fr.fms.services;
 
+import java.util.Map;
+
 import fr.fms.entities.Account;
+import fr.fms.entities.Operation;
 
 public interface IBankService {
 // interface ServiceBank 
@@ -16,5 +19,7 @@ public interface IBankService {
 
 	// methode virement
 	void makeTransfer(int accountId_withdrawal, int accountId_deposit, double amount);
-
+	
+	// methode filtre sur les operations d'un compte donné
+	Map<Integer,Operation> getOperations(int idAccount);
 }

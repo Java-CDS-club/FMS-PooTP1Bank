@@ -133,6 +133,24 @@ public class IBankServiceImpl implements IBankService {
 
 	}
 
-	// TODO methode filtre sur les operations d'un compte donné
+	//methode filtre sur les operations d'un compte donné
+	@Override
+	public Map<Integer, Operation> getOperations(int idAccount) {
+		//hashMap de retour
+		Map<Integer,Operation> returnOperations = new HashMap<>();
+		//Parcours map des opérations
+		for(Operation currentOperation : operations.values()) {
+			//vérifier si l'idAccount correspond à l'id des accounts de la map Operations
+			
+			if(currentOperation.getAccount().getId() == idAccount) {
+			//stocker l'Operation courrante dans le tableau résultat
+				returnOperations.put(currentOperation.getId(), currentOperation);
+			}
+		}
+		//retourner le tableau
+		return returnOperations;
+	}
 
+	
+	
 }
