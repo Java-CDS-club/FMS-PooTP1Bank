@@ -42,7 +42,13 @@ public class IBankServiceImpl implements IBankService {
 		return null; // pas de id !
 
 	}
-
+	/**
+	 * effectuer un retrait
+	 * 
+	 * @author Mehdioui_Ayyoub
+	 * @param accountId, amount
+	 * 
+	 */
 	@Override
 	public void makeWithdrawal(int accountId, double amount) {
 		// faire un retrait : trouver le compte
@@ -83,7 +89,13 @@ public class IBankServiceImpl implements IBankService {
 		}
 
 	}
-
+	/**
+	 * effectuer un dépôt
+	 * 
+	 * @author SupervielleBF
+	 * @param accountId, amount
+	 * 
+	 */
 	@Override
 	public void makeDeposit(int accountId, double amount) {
 
