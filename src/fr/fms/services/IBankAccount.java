@@ -1,6 +1,5 @@
 package fr.fms.services;
 
-import java.util.List;
 import fr.fms.entities.Account;
 
 public interface IBankAccount {
@@ -9,6 +8,6 @@ public interface IBankAccount {
 	void addAccount(Account account);
 
 	// todo chercher les compte d'un client
-	List<Account> findCustomerAccount(int idCustomer);
+	void findCustomerAccount(int idCustomer);
 
 }
