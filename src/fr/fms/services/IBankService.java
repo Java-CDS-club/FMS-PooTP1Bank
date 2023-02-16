@@ -8,10 +8,10 @@ public interface IBankService {
 	// fourni methode consulter compte {id}
 	Account getAccount(int id);
 
-	// methode versement
+	// methode retrait
 	void makeWithdrawal(int accountId, double amount);
 
-	// methode retrait
+	// methode versement
 	void makeDeposit(int accountId, double amount);
 
 	// methode virement

@@ -1,33 +1,32 @@
 package fr.fms.entities;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public abstract class Operation {
-	//attribute
+	// attribute
 	private int id;
-	private Date operationDate;
+	private LocalDate operationDate;
 	private double amount;
 	private Account account;
-	
-	
-	//const
-	public Operation(int id, Date operationDate, double amount, Account account) {
+
+	// const
+	public Operation(int id, LocalDate operationDate, double amount, Account account) {
 		this.setId(id);
 		this.setOperationDate(operationDate);
 		this.setAmount(amount);
 		this.setAccount(account);
 	}
 
-	//methodes
+	// methodes
 
-
-
-	//To string
+	// To string
 	@Override
 	public String toString() {
-		return "Operation [id=" + id + ", operationDate=" + operationDate + ", amount=" + amount + ", amount=" + account.toString() + "]";
+		return "Operation [id=" + id + ", operationDate=" + operationDate + ", amount=" + amount + ", amount="
+				+ account.toString() + "]";
 	}
-	//get&set
+
+	// get&set
 	public int getId() {
 		return id;
 	}
@@ -36,33 +35,28 @@ public abstract class Operation {
 		this.id = id;
 	}
 
-
-	public Date getOperationDate() {
+	public LocalDate getOperationDate() {
 		return operationDate;
 	}
 
-
-	public void setOperationDate(Date operationDate) {
+	public void setOperationDate(LocalDate operationDate) {
 		this.operationDate = operationDate;
 	}
-
 
 	public double getAmount() {
 		return amount;
 	}
 
-
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-
 
 	public Account getAccount() {
 		return account;
 	}
 
-
 	public void setAccount(Account account) {
-		this.account = new Account(account.getId(), account.getAccountNumber(), account.getBalance(), account.getUser(), account.getDate());
+		this.account = new Account(account.getId(), account.getAccountNumber(), account.getBalance(), account.getUser(),
+				account.getDate());
 	}
 }

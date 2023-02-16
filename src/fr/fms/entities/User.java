@@ -3,7 +3,7 @@ package fr.fms.entities;
 import java.util.Date;
 
 public class User {
-	
+
 	private int id;
 	private String lastName;
 	private String firstName;
@@ -11,10 +11,11 @@ public class User {
 	private String address;
 	private String phoneNumber;
 	private Date birthDate;
-	private String role;
-	
-	public User(int id, String lastName, String firstName, String email, String address, String phoneNumber, Date birthDate, String role) {
-		
+	private String role = "USER";
+
+	public User(int id, String lastName, String firstName, String email, String address, String phoneNumber,
+			Date birthDate, String role) {
+
 		this.id = id;
 		this.lastName = lastName;
 		this.firstName = firstName;
