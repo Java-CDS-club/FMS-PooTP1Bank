@@ -6,6 +6,7 @@ import java.util.Map;
 
 import fr.fms.entities.Account;
 import fr.fms.entities.CurrentAccount;
+import fr.fms.entities.DepositOperation;
 import fr.fms.entities.Operation;
 import fr.fms.entities.SavingAccount;
 import fr.fms.entities.WithdrawalOperation;
@@ -85,8 +86,24 @@ public class IBankServiceImpl implements IBankService {
 
 	@Override
 	public void makeDeposit(int accountId, double amount) {
-		// TODO Auto-generated method stub
 
+		Map<Integer, Account> accounts = new HashMap<>();// temporaire
+
+		if (accounts.get(accountId) != null) {
+			// add the amount to the account
+
+			accounts.get(accountId).setBalance(accounts.get(accountId).getBalance() + amount);
+
+			// one operation related to one accountID
+			// the Operation Object
+			operations.put(operations.size() + 1,
+					new DepositOperation(accountId, date, amount, accounts.get(accountId)));// operations.get(operationId).set
+
+			// ajouter à la liste d'objets d'opération : date du transfert, montant et
+			// account approvisionné
+		} else {
+			System.out.println("l 'id saisit est invalide !");
+		}
 	}
 
 	@Override
