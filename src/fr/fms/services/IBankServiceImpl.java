@@ -19,9 +19,6 @@ public class IBankServiceImpl implements IBankService {
 		operations = new HashMap<Integer, Operation>();
 	}
 
-	// la date de l opération
-	LocalDate date = LocalDate.now();
-
 	/**
 	 * consulter un compte bancaire
 	 * 
@@ -42,6 +39,7 @@ public class IBankServiceImpl implements IBankService {
 		return null; // pas de id !
 
 	}
+
 	/**
 	 * effectuer un retrait
 	 * 
@@ -58,11 +56,12 @@ public class IBankServiceImpl implements IBankService {
 		if (account != null) {
 			if (account instanceof CurrentAccount) {
 				CurrentAccount currentAccount = (CurrentAccount) account;
-				if (currentAccount.getBalance() > currentAccount.getOverdraft() + amount) {
+				if (currentAccount.getBalance() >= currentAccount.getOverdraft() + amount) {
 					// modifier le solde
 					currentAccount.setBalance(currentAccount.getBalance() - amount);
 					// creer l opération
-					WithdrawalOperation operation = new WithdrawalOperation(accountId, date, amount, currentAccount);
+					WithdrawalOperation operation = new WithdrawalOperation(accountId, LocalDate.now(), amount,
+							currentAccount);
 					// ajout de l opération dans le tableau
 					operations.put(operations.size() + 1, operation);
 				} else {
@@ -73,11 +72,12 @@ public class IBankServiceImpl implements IBankService {
 			// compte epargne
 			if (account instanceof SavingAccount) {
 				SavingAccount savingAccount = (SavingAccount) account;
-				if (savingAccount.getBalance() > amount) {
+				if (savingAccount.getBalance() >= amount) {
 					// modifier le solde
 					savingAccount.setBalance(savingAccount.getBalance() - amount);
 					// creer l opération
-					WithdrawalOperation operation = new WithdrawalOperation(accountId, date, amount, savingAccount);
+					WithdrawalOperation operation = new WithdrawalOperation(accountId, LocalDate.now(), amount,
+							savingAccount);
 					// ajout de l opération dans le tableau
 					operations.put(operations.size() + 1, operation);
 				} else {
@@ -89,6 +89,7 @@ public class IBankServiceImpl implements IBankService {
 		}
 
 	}
+
 	/**
 	 * effectuer un dépôt
 	 * 
@@ -109,7 +110,7 @@ public class IBankServiceImpl implements IBankService {
 			// one operation related to one accountID
 			// the Operation Object
 			operations.put(operations.size() + 1,
-					new DepositOperation(accountId, date, amount, accounts.get(accountId)));// operations.get(operationId).set
+					new DepositOperation(accountId, LocalDate.now(), amount, accounts.get(accountId)));// operations.get(operationId).set
 
 			// ajouter à la liste d'objets d'opération : date du transfert, montant et
 			// account approvisionné
@@ -120,7 +121,15 @@ public class IBankServiceImpl implements IBankService {
 
 	@Override
 	public void makeTransfer(int accountId_withdrawal, int accountId_deposit, double amount) {
-		// TODO Auto-generated method stub
+
+		if (accountId_withdrawal != accountId_deposit) {
+			// methode virement : retir => compte n1
+			makeWithdrawal(accountId_withdrawal, amount);
+			// verse => compte n2
+			makeDeposit(accountId_deposit, amount);
+		} else {
+			System.out.println("vous ne pouvez pas retirer et verser sur le même compte");
+		}
 
 	}
 
