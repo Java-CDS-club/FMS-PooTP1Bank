@@ -33,7 +33,7 @@ public abstract class Account {
 
 	public void setUser(User user) {
 		this.user = new User(user.getId(), user.getLastName(), user.getFirstName(), user.getEmail(), user.getAddress(),
-				user.getPhoneNumber(), user.getBirthDate(), user.getRole());
+				user.getPhoneNumber(), user.getBirthDate());
 	}
 
 	public Date getDate() {

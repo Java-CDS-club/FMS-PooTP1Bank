@@ -1,6 +1,7 @@
 package fr.fms.entities;
 
-import java.util.Date;
+// import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class User {
 
@@ -10,11 +11,11 @@ public class User {
 	private String email;
 	private String address;
 	private String phoneNumber;
-	private Date birthDate;
+	private LocalDateTime birthDate;
 	private String role = "USER";
 
 	public User(int id, String lastName, String firstName, String email, String address, String phoneNumber,
-			Date birthDate, String role) {
+			LocalDateTime birthDate) {
 
 		this.id = id;
 		this.lastName = lastName;
@@ -23,7 +24,6 @@ public class User {
 		this.address = address;
 		this.phoneNumber = phoneNumber;
 		this.birthDate = birthDate;
-		this.role = role;
 	}
 
 	public int getId() {
@@ -74,11 +74,11 @@ public class User {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public Date getBirthDate() {
+	public LocalDateTime getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(LocalDateTime birthDate) {
 		this.birthDate = birthDate;
 	}
 
