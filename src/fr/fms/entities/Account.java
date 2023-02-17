@@ -1,6 +1,6 @@
 package fr.fms.entities;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public abstract class Account {
 
@@ -8,15 +8,15 @@ public abstract class Account {
 	private String accountNumber;
 	private double balance;
 	private User user;
-	private Date date;
+	private LocalDate date;
 
-	public Account(int id, String accountNumber, double balance, User user, Date date) {
+	public Account(int id, String accountNumber, double balance, User user, LocalDate localDate) {
 
 		this.id = id;
 		this.accountNumber = accountNumber;
 		this.balance = balance;
 		this.user = user;
-		this.date = date;
+		this.date = localDate;
 	}
 
 	public int getId() {
@@ -36,11 +36,11 @@ public abstract class Account {
 				user.getPhoneNumber(), user.getBirthDate());
 	}
 
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
@@ -65,5 +65,4 @@ public abstract class Account {
 		return "Account [id=" + id + ", accountNumber=" + accountNumber + ", balance=" + balance + ", user=" + user
 				+ ", date=" + date + "]";
 	}
-
 }

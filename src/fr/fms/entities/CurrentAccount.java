@@ -1,13 +1,13 @@
 package fr.fms.entities;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class CurrentAccount extends Account {
 
 	private double overdraft;
 	
-	public CurrentAccount(double overdraft, int id, String accountNumber, double balance, User user, Date date) {
+	public CurrentAccount(int id, double overdraft, String accountNumber, double balance, User user, LocalDate localDate) {
 		
-		super(id, accountNumber, balance, user, date);
+		super(id, accountNumber, balance, user, localDate);
 		this.overdraft=overdraft;
 	}
 	
@@ -23,6 +23,4 @@ public class CurrentAccount extends Account {
 	public String toString() {
 		return "CurrentAccount [overdraft=" + overdraft + ", toString()=" + super.toString() + "]";
 	}
-
-	
 }

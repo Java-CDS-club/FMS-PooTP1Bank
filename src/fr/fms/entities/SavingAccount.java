@@ -1,11 +1,11 @@
 package fr.fms.entities;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class SavingAccount extends Account {
 
 	private double interestRate;
 
-	public SavingAccount(double interestRate, int id, String accountNumber, double balance, User user, Date date) {
+	public SavingAccount(int id, double interestRate, String accountNumber, double balance, User user, LocalDate date) {
 		super(id, accountNumber, balance, user, date);
 		this.interestRate=interestRate;
 	}
@@ -22,7 +22,4 @@ public class SavingAccount extends Account {
 	public String toString() {
 		return "SavingAccount [interestRate=" + interestRate + ", toString()=" + super.toString() + "]";
 	}
-
-
-
 }
