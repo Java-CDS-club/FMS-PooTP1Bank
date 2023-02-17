@@ -1,62 +1,92 @@
 package fr.fms.services;
+
 import java.util.Scanner;
-import fr.fms.entities.Account;
 
 public class ServiceBank {
 
 	public static void main(String[] args) {
 
-		System.out.println("Bienvenue chez FMS myBank™. Que souhaitez vous faire ?");
-		
-		int input=0;
+		System.out.println("Bienvenue chez FMS myBank™. Que souhaitez-vous faire ?");
+
+		int input = 0;
 		Scanner scan = new Scanner(System.in);
 
-		while (input != 5) {
-			
-			System.out.println("1 : Créer un compte");
-			System.out.println("2 : Consulter mon compte");
-			System.out.println("3 : Effectuer une opération (retrait - versement - virement)");
-			System.out.println("4 : Quitter l'application");;
-	}
-		while (!scan.hasNextInt()) scan.next();
-		
-			input= scan.nextInt();	
-			switch(input) {
-			
-			case 1: // créer le compte
-				System.out.println("Case 1");
-			break;
-			case 2:
-				System.out.println("Veuillez saisir l'identifiant du compte :");
-				scan.nextInt(); // Saisir l'ID du compte pour se connecter
-			
-			case 3: // Afficher le compte, et les informations du compte pour que l'utilisateur consulte
-				System.out.println("Case 3");
+		// Affichage du menu principal
+		while (input < 6) {
+			System.out.println();
+			System.out.println("1 : Consulter mon compte");
+			System.out.println("2 : Effectuer un versement");
+			System.out.println("3 : Effectuer un retrait");
+			System.out.println("4 : Effectuer un virement");
+			System.out.println("5 : ADMIN");
+			System.out.println("6 : Quitter l'application");
+			System.out.println();
+			while (!scan.hasNextInt())
+				scan.next();
+			input = scan.nextInt();
+			switch (input) {
+			// Consulter mon compte
+			case 1:
+				System.out.println("Consulter mon compte");
+
 				break;
+			// Effectuer un versement
+			case 2:
+				System.out.println("Effectuer un versement");
+
+				break;
+			// Effectuer un retrait
+			case 3:
+				System.out.println("Effectuer un retrait");
+
+				break;
+			// Effectuer un virement
 			case 4:
-				int operationSelect; 
-				System.out.println("Sélectionner l'opération à effectuer :");
-				operationSelect=scan.nextInt();
-				
-				switch(operationSelect) {
-				case 1:
-				// Effectuer un dépôt
-				case 2:
-					// Effectuer un retrait
-				case 3:
-					// Effectuer un virement (transfert)
-					
-				default: System.err.println("Erreur de saisie");
-					break;
+				System.out.println("Effectuer un virement");
+
+				break;
+			// ADMIN
+			case 5:
+				System.out.println("ADMIN");
+				input = 0;
+				while (input < 3) {
+					System.out.println();
+					System.out.println("1 : Ajouter un client");
+					System.out.println("2 : Ajouter un compte");
+					System.out.println("3 : Retourner au menu principal");
+					System.out.println();
+					while (!scan.hasNextInt())
+						scan.next();
+					input = scan.nextInt();
+					switch (input) {
+					// Ajouter un client
+					case 1:
+						System.out.println("Ajouter un client");
+
+						break;
+					// Ajouter un compte
+					case 2:
+						System.out.println("Ajouter un compte");
+
+						break;
+					// Retourner au menu principal
+					case 3:
+						System.out.println("Retourner au menu principal");
+
+						break;
+					default:
+						System.out.println("Erreur de saisie");
+					}
 				}
 				break;
-			case 5:
+			// Quitter l'application
+			case 6:
 				System.out.println("Quitter l'application");
-				break;
-			}
-		}	
 
-	public void createAccount(Account account) {
-		
+				break;
+			default:
+				System.out.println("Erreur de saisie");
+			}
+		}
 	}
 }

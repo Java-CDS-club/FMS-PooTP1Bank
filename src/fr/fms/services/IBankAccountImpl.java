@@ -1,7 +1,6 @@
 package fr.fms.services;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import fr.fms.entities.Account;
@@ -22,7 +21,7 @@ public class IBankAccountImpl implements IBankAccount {
 	@Override
 	public void findCustomerAccount(int idCustomer) {
 		// Parcourir la liste des comptes
-		for(Account account : accounts.values()) {
+		for (Account account : accounts.values()) {
 			// Pour trouver le compte qui appartient à un client en particulier {id}
 			if (account.getUser().getId() == idCustomer) {
 				// Afficher le compte en question
@@ -32,7 +31,7 @@ public class IBankAccountImpl implements IBankAccount {
 	}
 
 	public void displayAccount() {
-		for(Account account : accounts.values()) {
+		for (Account account : accounts.values()) {
 			System.out.println(account);
 		}
 	}

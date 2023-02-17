@@ -56,7 +56,6 @@ public abstract class Operation {
 	}
 
 	public void setAccount(Account account) {
-		this.account = new Account(account.getId(), account.getAccountNumber(), account.getBalance(), account.getUser(),
-				account.getDate());
+		this.account = account;
 	}
 }
