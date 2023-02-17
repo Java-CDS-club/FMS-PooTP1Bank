@@ -7,7 +7,7 @@ import fr.fms.entities.Account;
 
 public class IBankAccountImpl implements IBankAccount {
 
-	public Map<Integer, Account> accounts;
+	public static Map<Integer, Account> accounts;
 
 	public IBankAccountImpl() {
 		accounts = new HashMap<>();

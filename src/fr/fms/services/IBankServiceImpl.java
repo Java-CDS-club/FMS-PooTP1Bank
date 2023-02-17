@@ -12,8 +12,6 @@ import fr.fms.entities.SavingAccount;
 import fr.fms.entities.WithdrawalOperation;
 
 public class IBankServiceImpl implements IBankService {
-	// ajout ibankAccount pour recuperer la hashMap (accounts)
-	public IBankAccountImpl ibancAccount = new IBankAccountImpl();
 	public Map<Integer, Operation> operations;
 
 	public IBankServiceImpl() {
@@ -30,7 +28,7 @@ public class IBankServiceImpl implements IBankService {
 	@Override
 	public Account getAccount(int id) {
 		// find accountById
-		Map<Integer, Account> accounts = ibancAccount.accounts;
+		Map<Integer, Account> accounts = IBankAccountImpl.accounts;
 		Account account = null;
 
 		account = accounts.get(id);
@@ -101,7 +99,7 @@ public class IBankServiceImpl implements IBankService {
 	@Override
 	public void makeDeposit(int accountId, double amount) {
 
-		Map<Integer, Account> accounts = ibancAccount.accounts;// temporaire
+		Map<Integer, Account> accounts = IBankAccountImpl.accounts;// temporaire
 
 		if (accounts.get(accountId) != null) {
 			// add the amount to the account

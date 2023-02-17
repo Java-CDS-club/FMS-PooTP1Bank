@@ -12,6 +12,7 @@ import fr.fms.entities.User;
 import fr.fms.entities.WithdrawalOperation;
 import fr.fms.services.IBankAccountImpl;
 import fr.fms.services.IBankCustomerImpl;
+import fr.fms.services.IBankServiceImpl;
 
 public class Test {
 
@@ -63,7 +64,15 @@ public class Test {
 		System.out.println("la liste des comptes :");
 		accountImpl.displayAccount();
 
+		//liste d'opérations
 		// compte inexistant
+		System.out.println("---------------------------");
+		IBankServiceImpl operationImpl = new IBankServiceImpl();
+		int idAccount=50;
+		if (operationImpl.getAccount(idAccount) == null) System.out.println("Vous demandez un compte inexistant");
+		else System.out.println(operationImpl.getAccount(idAccount));
+		
+		//dépassé capacité de retrait
 
 	}
 }
