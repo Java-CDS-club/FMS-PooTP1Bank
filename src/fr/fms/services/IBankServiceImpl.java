@@ -55,7 +55,7 @@ public class IBankServiceImpl implements IBankService {
 		if (account != null) {
 			if (account instanceof CurrentAccount) {
 				CurrentAccount currentAccount = (CurrentAccount) account;
-				if (currentAccount.getBalance() >= currentAccount.getOverdraft() + amount) {
+				if (currentAccount.getBalance() + currentAccount.getOverdraft() >= amount) {
 					// modifier le solde
 					currentAccount.setBalance(currentAccount.getBalance() - amount);
 					// creer l opération
