@@ -4,7 +4,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import fr.fms.entities.Account;
 import fr.fms.entities.CurrentAccount;
+import fr.fms.entities.DepositOperation;
+import fr.fms.entities.Operation;
+import fr.fms.entities.SavingAccount;
 import fr.fms.entities.User;
+import fr.fms.entities.WithdrawalOperation;
 
 public class Test {
 
@@ -30,8 +34,19 @@ public class Test {
 		System.out.println(macronAccount);
 		Account bidenAccount = new CurrentAccount(2, 15000, "77", 250000, biden, LocalDate.now());
 		System.out.println(bidenAccount);
-		
+		//int id, double interestRate, String accountNumber, double balance, User user, LocalDate date
+		Account macronSavingAccount = new SavingAccount(3, 2, "69S", 25000, macron, LocalDate.now());
+		System.out.println(macronSavingAccount);
+		Account bidenSavingAccount = new SavingAccount(4, 3, "77S", 250000, biden, LocalDate.now());
+		System.out.println(bidenSavingAccount);
+		System.out.println();
 		// Faire des opérations
+		//int id, LocalDate operationDate, double amount, Account account
+		Operation deposit1 = new DepositOperation(1, LocalDate.now(), 200, macronAccount);
+		System.out.println(deposit1);
+		//int id, LocalDate operationDate, double amount, Account account
+		Operation withdrawal1 = new WithdrawalOperation(2, LocalDate.now(), 333, macronAccount);
+		System.out.println(withdrawal1);
 		
 	}
 }

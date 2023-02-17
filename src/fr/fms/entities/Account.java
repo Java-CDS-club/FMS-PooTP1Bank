@@ -62,7 +62,7 @@ public abstract class Account {
 
 	@Override
 	public String toString() {
-		return "Account [id=" + id + ", accountNumber=" + accountNumber + ", balance=" + balance + ", user=" + user
-				+ ", date=" + date + "]";
+		return "AccountId=" + id + ", creationDate=" + date + ", accountNumber=" + accountNumber + ", balance=" + balance + ", " + user
+				 + "]";
 	}
 }
