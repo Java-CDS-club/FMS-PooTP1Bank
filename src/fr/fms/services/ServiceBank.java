@@ -5,7 +5,13 @@ import java.util.Scanner;
 public class ServiceBank {
 
 	public static void main(String[] args) {
-
+		/**
+		 * menu principal myBank
+		 * 
+		 * @author Samuel_LePorcher
+		 * @author Camille_Gaschet
+		 * 
+		 */
 		System.out.println("Bienvenue chez FMS myBank™. Que souhaitez-vous faire ?");
 
 		int input = 0;

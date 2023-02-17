@@ -12,7 +12,8 @@ import fr.fms.entities.SavingAccount;
 import fr.fms.entities.WithdrawalOperation;
 
 public class IBankServiceImpl implements IBankService {
-
+	// ajout ibankAccount pour recuperer la hashMap (accounts)
+	public IBankAccountImpl ibancAccount = new IBankAccountImpl();
 	public Map<Integer, Operation> operations;
 
 	public IBankServiceImpl() {
@@ -29,7 +30,7 @@ public class IBankServiceImpl implements IBankService {
 	@Override
 	public Account getAccount(int id) {
 		// find accountById
-		Map<Integer, Account> accounts = new HashMap<Integer, Account>();
+		Map<Integer, Account> accounts = ibancAccount.accounts;
 		Account account = null;
 
 		account = accounts.get(id);
@@ -100,7 +101,7 @@ public class IBankServiceImpl implements IBankService {
 	@Override
 	public void makeDeposit(int accountId, double amount) {
 
-		Map<Integer, Account> accounts = new HashMap<>();// temporaire
+		Map<Integer, Account> accounts = ibancAccount.accounts;// temporaire
 
 		if (accounts.get(accountId) != null) {
 			// add the amount to the account
@@ -119,6 +120,13 @@ public class IBankServiceImpl implements IBankService {
 		}
 	}
 
+	/**
+	 * effectuer un virement
+	 * 
+	 * @author Mehdioui_Ayyoub
+	 * @param accountId, amount
+	 * 
+	 */
 	@Override
 	public void makeTransfer(int accountId_withdrawal, int accountId_deposit, double amount) {
 
@@ -133,24 +141,29 @@ public class IBankServiceImpl implements IBankService {
 
 	}
 
-	//methode filtre sur les operations d'un compte donné
+	/**
+	 * renvoie les opérations effectuées sur un compte {id}
+	 * 
+	 * @author SupervielleBF
+	 * @param accountId, amount
+	 * 
+	 */
+	// methode filtre sur les operations d'un compte donné
 	@Override
 	public Map<Integer, Operation> getOperations(int idAccount) {
-		//hashMap de retour
-		Map<Integer,Operation> returnOperations = new HashMap<>();
-		//Parcours map des opérations
-		for(Operation currentOperation : operations.values()) {
-			//vérifier si l'idAccount correspond à l'id des accounts de la map Operations
-			
-			if(currentOperation.getAccount().getId() == idAccount) {
-			//stocker l'Operation courrante dans le tableau résultat
+		// hashMap de retour
+		Map<Integer, Operation> returnOperations = new HashMap<>();
+		// Parcours map des opérations
+		for (Operation currentOperation : operations.values()) {
+			// vérifier si l'idAccount correspond à l'id des accounts de la map Operations
+
+			if (currentOperation.getAccount().getId() == idAccount) {
+				// stocker l'Operation courrante dans le tableau résultat
 				returnOperations.put(currentOperation.getId(), currentOperation);
 			}
 		}
-		//retourner le tableau
+		// retourner le tableau
 		return returnOperations;
 	}
 
-	
-	
 }

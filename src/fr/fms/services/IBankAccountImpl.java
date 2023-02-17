@@ -13,11 +13,25 @@ public class IBankAccountImpl implements IBankAccount {
 		accounts = new HashMap<>();
 	}
 
+	/**
+	 * ajouter un compte
+	 * 
+	 * @author Samuel_LePorcher
+	 * @param account
+	 * 
+	 */
 	@Override
 	public void addAccount(Account account) {
 		accounts.put(account.getId(), account);
 	}
 
+	/**
+	 * trouver les comptes d'un client
+	 * 
+	 * @author Camille_Gaschet
+	 * @param idCustomer
+	 * 
+	 */
 	@Override
 	public void findCustomerAccount(int idCustomer) {
 		// Parcourir la liste des comptes
