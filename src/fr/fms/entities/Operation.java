@@ -22,8 +22,8 @@ public abstract class Operation {
 	// To string
 	@Override
 	public String toString() {
-		return "Operation [id=" + id + ", operationDate=" + operationDate + ", amount=" + amount + ", amount="
-				+ account.toString() + "]";
+		return "Transaction [TransactionId = " + id + ", TransactionDate = " + operationDate + ", amount = " + amount
+				+ ", accountId = " + account.getId() + "]";
 	}
 
 	// get&set

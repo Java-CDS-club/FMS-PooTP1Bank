@@ -2,6 +2,7 @@ package fr.fms.tests;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Map;
 
 import fr.fms.entities.Account;
 import fr.fms.entities.CurrentAccount;
@@ -17,11 +18,6 @@ import fr.fms.services.IBankServiceImpl;
 public class Test {
 
 	public static void main(String[] args) {
-
-		// TODO gérer les affichages et les jeux de test ,
-		// TODO liaisons entre les interfaceImpl : customers-accounts-operations
-		// TODO sortir peut être le menu principal de ServiceBank !
-		// TODO relation entre account et operation => diagramme de classe
 
 		// Générer des customers
 		User macron = new User(1, "Macron", "Emmanuel", "emmanuel.macron@gouv.fr",
@@ -41,7 +37,7 @@ public class Test {
 		Operation withdrawal1 = new WithdrawalOperation(2, LocalDate.now(), 333, macronAccount);
 
 		// Affichage et jeux de test
-		System.out.println("création et affichage de deux compte bancaires :");
+		System.out.println("création et affichage de deux compte bancaires :\n");
 		System.out.println(macronAccount);
 		System.out.println(macronSavingAccount);
 		System.out.println("----------------------------------------------");
@@ -49,38 +45,49 @@ public class Test {
 		System.out.println("solde du compte epargne de manu:" + macronSavingAccount.getBalance());
 		System.out.println("----------------------------------------------");
 		IBankCustomerImpl customerImpl = new IBankCustomerImpl();
-		
+
 		// Ajout dans la hashMap
 		customerImpl.addCustomer(macron);
 		customerImpl.addCustomer(biden);
-		System.out.println("liste de nos clients :");
+		System.out.println("liste de nos clients :\n");
 		customerImpl.displayCustomer();
-		System.out.println("---------------------------");
-		
+		System.out.println("------------------------------------------");
+
 		// Liste des comptes
 		IBankAccountImpl accountImpl = new IBankAccountImpl();
 		accountImpl.addAccount(macronAccount);
 		accountImpl.addAccount(bidenAccount);
 		accountImpl.addAccount(macronSavingAccount);
 		accountImpl.addAccount(bidenSavingAccount);
-		System.out.println("la liste des comptes :");
+		System.out.println("la liste des comptes :\n");
 		accountImpl.displayAccount();
 
 		// Liste des opérations
-		System.out.println("---------------------------");
+		System.out.println("-----------------------------------------");
 		IBankServiceImpl operationImpl = new IBankServiceImpl();
-		int idAccount=50;
-		if (operationImpl.getAccount(idAccount) == null) System.out.println("Vous demandez un compte inexistant");
-		else System.out.println(operationImpl.getAccount(idAccount));
-		
+		int idAccount = 50;
+		if (operationImpl.getAccount(idAccount) == null)
+			System.out.println("Vous demandez un compte inexistant");
+		else
+			System.out.println(operationImpl.getAccount(idAccount));
+
 		// Dépassement de capacité de retrait
 		operationImpl.makeWithdrawal(1, 30002);
-		
+
 		// Virement sur le même compte
-		operationImpl.makeTransfer(2, 1, 1000);
-		
+		operationImpl.makeTransfer(1, 1, 1000);
+
 		// Affichage des comptes qui appartiennent à un client
-		System.out.println("liste des comptes de Macron :");
+		System.out.println("\n--------------liste des comptes de Macron--------------------");
 		accountImpl.findCustomerAccount(macron.getId());
+
+		// liste des transactions de manu
+		operationImpl.addOperations(withdrawal1);
+		operationImpl.addOperations(deposit1);
+		System.out.println("\n-------------Liste des transactions sur le compte courant de manu ---------------");
+		Map<Integer, Operation> resultat = operationImpl.getOperations(macronAccount.getId());
+		for (Operation ope : resultat.values()) {
+			System.out.println(ope);
+		}
 	}
 }

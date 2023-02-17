@@ -11,6 +11,6 @@ public class DepositOperation extends Operation {
 
 	@Override
 	public String toString() {
-		return "DepositOperation [toString()=" + super.toString() + "]";
+		return "Versement : " + super.toString();
 	}
 }

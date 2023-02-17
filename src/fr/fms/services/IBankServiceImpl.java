@@ -18,6 +18,11 @@ public class IBankServiceImpl implements IBankService {
 		operations = new HashMap<Integer, Operation>();
 	}
 
+	// ajouter une operation dans la liste
+	public void addOperations(Operation operation) {
+		operations.put(operations.size() + 1, operation);
+	}
+
 	/**
 	 * consulter un compte bancaire
 	 * 

@@ -13,7 +13,7 @@ public class WithdrawalOperation extends Operation {
 
 	@Override
 	public String toString() {
-		return "WithdrawalOperation [toString()=" + super.toString() + "]";
+		return "Retrait : " + super.toString();
 	}
 
 }
