@@ -40,7 +40,7 @@ public class Test {
 		Operation deposit1 = new DepositOperation(1, LocalDate.now(), 200, macronAccount);
 		Operation withdrawal1 = new WithdrawalOperation(2, LocalDate.now(), 333, macronAccount);
 
-		// affichage et jeux de test
+		// Affichage et jeux de test
 		System.out.println("création et affichage de deux compte bancaires :");
 		System.out.println(macronAccount);
 		System.out.println(macronSavingAccount);
@@ -49,13 +49,15 @@ public class Test {
 		System.out.println("solde du compte epargne de manu:" + macronSavingAccount.getBalance());
 		System.out.println("----------------------------------------------");
 		IBankCustomerImpl customerImpl = new IBankCustomerImpl();
-		// ajouter dans la hashMap
+		
+		// Ajout dans la hashMap
 		customerImpl.addCustomer(macron);
 		customerImpl.addCustomer(biden);
 		System.out.println("liste de nos clients :");
 		customerImpl.displayCustomer();
 		System.out.println("---------------------------");
-		// liste des comptes
+		
+		// Liste des comptes
 		IBankAccountImpl accountImpl = new IBankAccountImpl();
 		accountImpl.addAccount(macronAccount);
 		accountImpl.addAccount(bidenAccount);
@@ -64,16 +66,21 @@ public class Test {
 		System.out.println("la liste des comptes :");
 		accountImpl.displayAccount();
 
-		//liste d'opérations
-		// compte inexistant
+		// Liste des opérations
 		System.out.println("---------------------------");
 		IBankServiceImpl operationImpl = new IBankServiceImpl();
 		int idAccount=50;
 		if (operationImpl.getAccount(idAccount) == null) System.out.println("Vous demandez un compte inexistant");
 		else System.out.println(operationImpl.getAccount(idAccount));
 		
-		//dépassé capacité de retrait
+		// Dépassement de capacité de retrait
 		operationImpl.makeWithdrawal(1, 30002);
 		
+		// Virement sur le même compte
+		operationImpl.makeTransfer(2, 1, 1000);
+		
+		// Affichage des comptes qui appartiennent à un client
+		System.out.println("liste des comptes de Macron :");
+		accountImpl.findCustomerAccount(macron.getId());
 	}
 }

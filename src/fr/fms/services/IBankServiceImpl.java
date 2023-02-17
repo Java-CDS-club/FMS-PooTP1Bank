@@ -63,6 +63,7 @@ public class IBankServiceImpl implements IBankService {
 							currentAccount);
 					// ajout de l opération dans le tableau
 					operations.put(operations.size() + 1, operation);
+					System.out.println("retrait effectué avec succès");
 				} else {
 					System.out.println("votre solde n'est pas suffisant !");
 				}
@@ -79,6 +80,7 @@ public class IBankServiceImpl implements IBankService {
 							savingAccount);
 					// ajout de l opération dans le tableau
 					operations.put(operations.size() + 1, operation);
+					System.out.println("retrait effectué avec succès");
 				} else {
 					System.out.println("votre solde n'est pas suffisant !");
 				}
@@ -110,11 +112,11 @@ public class IBankServiceImpl implements IBankService {
 			// the Operation Object
 			operations.put(operations.size() + 1,
 					new DepositOperation(accountId, LocalDate.now(), amount, accounts.get(accountId)));// operations.get(operationId).set
-
+			System.out.println("versement effectué avec succès");
 			// ajouter à la liste d'objets d'opération : date du transfert, montant et
 			// account approvisionné
 		} else {
-			System.out.println("l 'id saisit est invalide !");
+			System.out.println("l'id saisi est invalide !");
 		}
 	}
 
@@ -133,10 +135,10 @@ public class IBankServiceImpl implements IBankService {
 			makeWithdrawal(accountId_withdrawal, amount);
 			// verse => compte n2
 			makeDeposit(accountId_deposit, amount);
+			System.out.println("virement effectué avec succès");
 		} else {
 			System.out.println("vous ne pouvez pas retirer et verser sur le même compte");
 		}
-
 	}
 
 	/**
@@ -163,5 +165,4 @@ public class IBankServiceImpl implements IBankService {
 		// retourner le tableau
 		return returnOperations;
 	}
-
 }
