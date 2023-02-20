@@ -7,7 +7,7 @@ import fr.fms.entities.User;
 
 public class IBankCustomerImpl implements IBankCustomer {
 
-	public Map<Integer, User> customers;
+	private Map<Integer, User> customers;
 
 	public IBankCustomerImpl() {
 		customers = new HashMap<>();

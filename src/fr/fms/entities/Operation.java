@@ -7,7 +7,7 @@ public abstract class Operation {
 	private int id;
 	private LocalDate operationDate;
 	private double amount;
-	private Account account;
+	private Account account;// id du compte suffit
 
 	// const
 	public Operation(int id, LocalDate operationDate, double amount, Account account) {

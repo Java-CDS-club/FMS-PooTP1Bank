@@ -9,6 +9,7 @@ public abstract class Account {
 	private double balance;
 	private User user;
 	private LocalDate date;
+	// liste des operations
 
 	public Account(int id, String accountNumber, double balance, User user, LocalDate localDate) {
 
@@ -62,7 +63,7 @@ public abstract class Account {
 
 	@Override
 	public String toString() {
-		return "AccountId=" + id + ", creationDate=" + date + ", accountNumber=" + accountNumber + ", balance=" + balance + ", " + user
-				 + "]";
+		return "AccountId=" + id + ", creationDate=" + date + ", accountNumber=" + accountNumber + ", balance="
+				+ balance + ", " + user + "]";
 	}
 }

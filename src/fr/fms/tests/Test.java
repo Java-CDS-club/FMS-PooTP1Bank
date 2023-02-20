@@ -74,7 +74,7 @@ public class Test {
 		// Dépassement de capacité de retrait
 		operationImpl.makeWithdrawal(1, 30002);
 
-		// Virement sur le même compte
+		// Virement sur le même compte{id}
 		operationImpl.makeTransfer(1, 1, 1000);
 
 		// Affichage des comptes qui appartiennent à un client

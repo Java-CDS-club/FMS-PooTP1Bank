@@ -12,14 +12,13 @@ import fr.fms.entities.SavingAccount;
 import fr.fms.entities.WithdrawalOperation;
 
 public class IBankServiceImpl implements IBankService {
-	public Map<Integer, Operation> operations;
+	private Map<Integer, Operation> operations;
 
 	public IBankServiceImpl() {
 		operations = new HashMap<Integer, Operation>();
 	}
 
-	// ajouter une operation dans la liste
-	public void addOperations(Operation operation) {
+	public void addOperations(Operation operation) {// ajouter une operation dans la liste
 		operations.put(operations.size() + 1, operation);
 	}
 
@@ -32,16 +31,10 @@ public class IBankServiceImpl implements IBankService {
 	 */
 	@Override
 	public Account getAccount(int id) {
-		// find accountById
-		Map<Integer, Account> accounts = IBankAccountImpl.accounts;
-		Account account = null;
-
-		account = accounts.get(id);
-		if (account != null) {
+		Account account = IBankAccountImpl.getAccounts().get(id);// find accountById
+		if (account != null)
 			return account;
-		}
 		return null; // pas de id !
-
 	}
 
 	/**
@@ -53,47 +46,30 @@ public class IBankServiceImpl implements IBankService {
 	 */
 	@Override
 	public void makeWithdrawal(int accountId, double amount) {
-		// faire un retrait : trouver le compte
-		Account account = getAccount(accountId);
-		// voir le solde si cest suffisant (montant , decouvert)
-		// compte courant (decouvert)
+		Account account = getAccount(accountId);// faire un retrait : trouver le compte
 		if (account != null) {
-			if (account instanceof CurrentAccount) {
-				CurrentAccount currentAccount = (CurrentAccount) account;
-				if (currentAccount.getBalance() + currentAccount.getOverdraft() >= amount) {
-					// modifier le solde
-					currentAccount.setBalance(currentAccount.getBalance() - amount);
-					// creer l opération
+			if (account instanceof CurrentAccount) {// compte courant (decouvert)
+				if (((CurrentAccount) account).getBalance() + ((CurrentAccount) account).getOverdraft() >= amount) {// modifSold
+					((CurrentAccount) account).setBalance(((CurrentAccount) account).getBalance() - amount);// creOpé
 					WithdrawalOperation operation = new WithdrawalOperation(accountId, LocalDate.now(), amount,
-							currentAccount);
-					// ajout de l opération dans le tableau
-					operations.put(operations.size() + 1, operation);
+							((CurrentAccount) account));
+					operations.put(operations.size() + 1, operation);// ajout de l opération dans le tableau
 					System.out.println("retrait effectué avec succès");
-				} else {
+				} else
 					System.out.println("votre solde n'est pas suffisant !");
-				}
 			}
-
-			// compte epargne
-			if (account instanceof SavingAccount) {
-				SavingAccount savingAccount = (SavingAccount) account;
-				if (savingAccount.getBalance() >= amount) {
-					// modifier le solde
-					savingAccount.setBalance(savingAccount.getBalance() - amount);
-					// creer l opération
+			if (account instanceof SavingAccount) { // compte epargne
+				if (((SavingAccount) account).getBalance() >= amount) {// modifier le solde
+					((SavingAccount) account).setBalance(((SavingAccount) account).getBalance() - amount);
 					WithdrawalOperation operation = new WithdrawalOperation(accountId, LocalDate.now(), amount,
-							savingAccount);
-					// ajout de l opération dans le tableau
-					operations.put(operations.size() + 1, operation);
+							((SavingAccount) account)); // creer l opération
+					operations.put(operations.size() + 1, operation);// add opération dans le tableau
 					System.out.println("retrait effectué avec succès");
-				} else {
+				} else
 					System.out.println("votre solde n'est pas suffisant !");
-				}
 			}
-		} else {
+		} else
 			System.out.println("l 'id saisit est invalide !");
-		}
-
 	}
 
 	/**
@@ -105,24 +81,16 @@ public class IBankServiceImpl implements IBankService {
 	 */
 	@Override
 	public void makeDeposit(int accountId, double amount) {
-
-		Map<Integer, Account> accounts = IBankAccountImpl.accounts;// temporaire
-
-		if (accounts.get(accountId) != null) {
-			// add the amount to the account
-
+		Map<Integer, Account> accounts = IBankAccountImpl.getAccounts();// temporaire
+		if (accounts.get(accountId) != null) { // add the amount
 			accounts.get(accountId).setBalance(accounts.get(accountId).getBalance() + amount);
-
 			// one operation related to one accountID
 			// the Operation Object
 			operations.put(operations.size() + 1,
 					new DepositOperation(accountId, LocalDate.now(), amount, accounts.get(accountId)));// operations.get(operationId).set
 			System.out.println("versement effectué avec succès");
-			// ajouter à la liste d'objets d'opération : date du transfert, montant et
-			// account approvisionné
-		} else {
+		} else
 			System.out.println("l'id saisi est invalide !");
-		}
 	}
 
 	/**
@@ -134,16 +102,12 @@ public class IBankServiceImpl implements IBankService {
 	 */
 	@Override
 	public void makeTransfer(int accountId_withdrawal, int accountId_deposit, double amount) {
-
 		if (accountId_withdrawal != accountId_deposit) {
-			// methode virement : retir => compte n1
-			makeWithdrawal(accountId_withdrawal, amount);
-			// verse => compte n2
-			makeDeposit(accountId_deposit, amount);
+			makeWithdrawal(accountId_withdrawal, amount); // methode virement : retir => compte n1
+			makeDeposit(accountId_deposit, amount);// verse => compte n2
 			System.out.println("virement effectué avec succès");
-		} else {
+		} else
 			System.out.println("vous ne pouvez pas retirer et verser sur le même compte");
-		}
 	}
 
 	/**
@@ -156,18 +120,14 @@ public class IBankServiceImpl implements IBankService {
 	// methode filtre sur les operations d'un compte donné
 	@Override
 	public Map<Integer, Operation> getOperations(int idAccount) {
-		// hashMap de retour
-		Map<Integer, Operation> returnOperations = new HashMap<>();
-		// Parcours map des opérations
-		for (Operation currentOperation : operations.values()) {
+		Map<Integer, Operation> returnOperations = new HashMap<>(); // hashMap de retour
+		for (Operation currentOperation : operations.values()) {// Parcours map des opérations
 			// vérifier si l'idAccount correspond à l'id des accounts de la map Operations
-
 			if (currentOperation.getAccount().getId() == idAccount) {
 				// stocker l'Operation courrante dans le tableau résultat
 				returnOperations.put(currentOperation.getId(), currentOperation);
 			}
 		}
-		// retourner le tableau
 		return returnOperations;
 	}
 }
